@@ -330,34 +330,34 @@ public class TapiocaKing extends JApplet implements ActionListener
     boolean supout4 = true;
     
     //Supplies Ingredients Icon
-    ImageIcon ingIcon = createImageIcon("images/supply_ing.jpg");
+    ImageIcon ingIcon = createImageIcon("supply_ing.jpg");
     final JButton ings = new JButton("<html><CENTER>Purchase<br>Ingredients</CENTER></html>", ingIcon);
    
     // Interior Design Preview Picture in Research Tab
-    final JLabel inter_design2 = new JLabel(createImageIcon("images/classic_ex.jpg"));
+    final JLabel inter_design2 = new JLabel(createImageIcon("classic_ex.jpg"));
     
     // Interior Design Combo Box in Research Tab
     final static JComboBox<String> interBox = new JComboBox<String>();
     
     //store tab
-    final JLabel store_ceiling = new JLabel(createImageIcon("images/store_jungle_ceiling.jpg"));
-    final JLabel store_customers = new JLabel(createImageIcon("images/store_customer_ori.jpg"));
-    final JLabel store_money = new JLabel(createImageIcon("images/store_money_jungle.jpg"));
-    final JLabel store_fridge = new JLabel(createImageIcon("images/store_fridge_work.jpg"));
-    final JLabel store_blender = new JLabel(createImageIcon("images/store_blender_work.jpg"));
-    final JLabel store_ing = new JLabel(createImageIcon("images/store_ing_work.jpg"));
-    final JLabel store_cups = new JLabel(createImageIcon("images/store_cup_work.jpg"));
-    final JLabel store_napkin = new JLabel(createImageIcon("images/store_napkin_work.jpg"));
-    final JLabel store_straw = new JLabel(createImageIcon("images/store_straw_work.jpg"));
-    final JLabel store_staff = new JLabel(createImageIcon("images/store_staff_green.jpg"));
-    final JLabel store_rack = new JLabel(createImageIcon("images/store_rack_jungle.jpg"));
-    final JLabel store_stand = new JLabel(createImageIcon("images/store_stand1.jpg"));
-    final JLabel store_table1 = new JLabel(createImageIcon("images/store_jtable1_empty.jpg"));
-    final JLabel store_table2 = new JLabel(createImageIcon("images/store_jtable2_empty.jpg"));
-    final JLabel store_table3 = new JLabel(createImageIcon("images/store_jtable3_empty.jpg"));
-    final JLabel store_counter1 = new JLabel(createImageIcon("images/store_jcounter1.jpg"));
-    final JLabel store_counter2 = new JLabel(createImageIcon("images/store_jcounter2.jpg"));
-    final JLabel store_counter3 = new JLabel(createImageIcon("images/store_jcounter3.jpg"));
+    final JLabel store_ceiling = new JLabel(createImageIcon("store_jungle_ceiling.jpg"));
+    final JLabel store_customers = new JLabel(createImageIcon("store_customer_ori.jpg"));
+    final JLabel store_money = new JLabel(createImageIcon("store_money_jungle.jpg"));
+    final JLabel store_fridge = new JLabel(createImageIcon("store_fridge_work.jpg"));
+    final JLabel store_blender = new JLabel(createImageIcon("store_blender_work.jpg"));
+    final JLabel store_ing = new JLabel(createImageIcon("store_ing_work.jpg"));
+    final JLabel store_cups = new JLabel(createImageIcon("store_cup_work.jpg"));
+    final JLabel store_napkin = new JLabel(createImageIcon("store_napkin_work.jpg"));
+    final JLabel store_straw = new JLabel(createImageIcon("store_straw_work.jpg"));
+    final JLabel store_staff = new JLabel(createImageIcon("store_staff_green.jpg"));
+    final JLabel store_rack = new JLabel(createImageIcon("store_rack_jungle.jpg"));
+    final JLabel store_stand = new JLabel(createImageIcon("store_stand1.jpg"));
+    final JLabel store_table1 = new JLabel(createImageIcon("store_jtable1_empty.jpg"));
+    final JLabel store_table2 = new JLabel(createImageIcon("store_jtable2_empty.jpg"));
+    final JLabel store_table3 = new JLabel(createImageIcon("store_jtable3_empty.jpg"));
+    final JLabel store_counter1 = new JLabel(createImageIcon("store_jcounter1.jpg"));
+    final JLabel store_counter2 = new JLabel(createImageIcon("store_jcounter2.jpg"));
+    final JLabel store_counter3 = new JLabel(createImageIcon("store_jcounter3.jpg"));
     
     // flags for broken appliances
     int brokeFridge = -1;
@@ -378,10 +378,11 @@ public class TapiocaKing extends JApplet implements ActionListener
 		
 		//initialize the songs, ONLY FOR BROWSER APPLET VERSION
 		
-		song = getAudioClip(getDocumentBase(), "sounds/looping_radio_mix.au");
-		song2 = getAudioClip(getDocumentBase(), "sounds/ChillSong.au");
-		song3 = getAudioClip(getDocumentBase(), "sounds/ProgHouse.au");
-		cashsong = getAudioClip(getDocumentBase(), "sounds/cash_register.au");
+		//song = getAudioClip(getDocumentBase(), "music/NameYourFriends.au");
+		song = getAudioClip(getCodeBase(), "NameYourFriends.au");
+		song2 = getAudioClip(getCodeBase(), "ChillSong.au");
+		song3 = getAudioClip(getCodeBase(), "ProgHouse.au");
+		cashsong = getAudioClip(getCodeBase(), "cash_register.au");
 
 		
 		cupsupply = new Inventory(Ingredients.Cup, 20);
@@ -758,7 +759,7 @@ public class TapiocaKing extends JApplet implements ActionListener
         panel.setLayout(customLayout);
         
         //image
-        JLabel pic = new JLabel(createImageIcon("images/tutor1.jpg"));
+        JLabel pic = new JLabel(createImageIcon("tutor1.jpg"));
         pic.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         panel.add(pic);
         
@@ -826,7 +827,7 @@ public class TapiocaKing extends JApplet implements ActionListener
         panel.setLayout(customLayout);
         
         //image
-        JLabel pic = new JLabel(createImageIcon("images/tutor2.jpg"));
+        JLabel pic = new JLabel(createImageIcon("tutor2.jpg"));
         pic.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         panel.add(pic);
         
@@ -902,7 +903,7 @@ public class TapiocaKing extends JApplet implements ActionListener
         panel.setLayout(customLayout);
         
         //image
-        JLabel pic = new JLabel(createImageIcon("images/tutor3.jpg"));
+        JLabel pic = new JLabel(createImageIcon("tutor3.jpg"));
         pic.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         panel.add(pic);
         
@@ -973,7 +974,7 @@ public class TapiocaKing extends JApplet implements ActionListener
         panel.setLayout(customLayout);
         
         //image
-        JLabel pic = new JLabel(createImageIcon("images/tutor4.jpg"));
+        JLabel pic = new JLabel(createImageIcon("tutor4.jpg"));
         pic.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         panel.add(pic);
         
@@ -1047,7 +1048,7 @@ public class TapiocaKing extends JApplet implements ActionListener
         panel.setLayout(customLayout);
         
         //image
-        JLabel pic = new JLabel(createImageIcon("images/tutor5.jpg"));
+        JLabel pic = new JLabel(createImageIcon("tutor5.jpg"));
         pic.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         panel.add(pic);
         
@@ -1144,7 +1145,8 @@ public class TapiocaKing extends JApplet implements ActionListener
 		startButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		//insert the logo picture in the title screen
-		JLabel pic = new JLabel(createImageIcon("images/throne.jpg"));
+		JLabel pic = new JLabel(createImageIcon("throne.jpg"));
+		//JLabel pic = new JLabel(icon);
 		//updatePicture(pic, "throne.jpg");
 		panel.add("Center", pic);
 		
@@ -1246,7 +1248,7 @@ public class TapiocaKing extends JApplet implements ActionListener
         
         panel2.add(exit);
         
-        final JLabel set_king = new JLabel(createImageIcon("images/menu_first.jpg"));
+        final JLabel set_king = new JLabel(createImageIcon("menu_first.jpg"));
         panel2.add(set_king);
 		
 		//add functionality to the buttons, change cards as necessary
@@ -1261,11 +1263,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_newgame.jpg"));
+                set_king.setIcon(createImageIcon("menu_newgame.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_first.jpg"));
+                set_king.setIcon(createImageIcon("menu_first.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1284,11 +1286,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_tutor.jpg"));
+                set_king.setIcon(createImageIcon("menu_tutor.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_first.jpg"));
+                set_king.setIcon(createImageIcon("menu_first.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1322,11 +1324,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_credits.jpg"));
+                set_king.setIcon(createImageIcon("menu_credits.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_first.jpg"));
+                set_king.setIcon(createImageIcon("menu_first.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1353,11 +1355,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_option.jpg"));
+                set_king.setIcon(createImageIcon("menu_option.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_first.jpg"));
+                set_king.setIcon(createImageIcon("menu_first.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1409,11 +1411,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_newexit.jpg"));
+                set_king.setIcon(createImageIcon("menu_newexit.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_first.jpg"));
+                set_king.setIcon(createImageIcon("menu_first.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1501,7 +1503,7 @@ public class TapiocaKing extends JApplet implements ActionListener
         
         panel2.add(exit);
         
-        final JLabel set_king = new JLabel(createImageIcon("images/menu_resume.jpg"));
+        final JLabel set_king = new JLabel(createImageIcon("menu_resume.jpg"));
         panel2.add(set_king);
 		
 		//add functionality to the buttons, change cards as necessary
@@ -1517,11 +1519,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_resume.jpg"));
+                set_king.setIcon(createImageIcon("menu_resume.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_resume.jpg"));
+                set_king.setIcon(createImageIcon("menu_resume.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1583,11 +1585,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_tutor.jpg"));
+                set_king.setIcon(createImageIcon("menu_tutor.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_resume.jpg"));
+                set_king.setIcon(createImageIcon("menu_resume.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1614,11 +1616,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_credits.jpg"));
+                set_king.setIcon(createImageIcon("menu_credits.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_resume.jpg"));
+                set_king.setIcon(createImageIcon("menu_resume.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1645,11 +1647,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_option.jpg"));
+                set_king.setIcon(createImageIcon("menu_option.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_resume.jpg"));
+                set_king.setIcon(createImageIcon("menu_resume.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1701,11 +1703,11 @@ public class TapiocaKing extends JApplet implements ActionListener
         {
             public void mouseEntered(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_exit.jpg"));
+                set_king.setIcon(createImageIcon("menu_exit.jpg"));
             }       
             public void mouseExited(MouseEvent e)
             {
-                set_king.setIcon(createImageIcon("images/menu_resume.jpg"));
+                set_king.setIcon(createImageIcon("menu_resume.jpg"));
                 
             }
             public void mouseClicked(MouseEvent e)
@@ -1754,7 +1756,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    panel3.setBackground(Color.white);
 	    panel3.setLayout(customLayout);
    
-	    storelbl = new JLabel(createImageIcon("images/storename.jpg"));
+	    storelbl = new JLabel(createImageIcon("storename.jpg"));
 	    panel3.add(storelbl);
 	
         storename = new TxtField("Tapioca King", 22);
@@ -1765,7 +1767,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    interlabel = new JLabel("Interior");
 	    panel3.add(interlabel);
 	    
-	    JLabel kingbl = new JLabel(createImageIcon("images/setup_king.jpg"));
+	    JLabel kingbl = new JLabel(createImageIcon("setup_king.jpg"));
         panel3.add(kingbl);
 	
 	    colorlabel = new JLabel("Uniform Color:");
@@ -1813,16 +1815,16 @@ public class TapiocaKing extends JApplet implements ActionListener
 		});
 
 
-        final JLabel inter_design1 = new JLabel(createImageIcon("images/classic_ex.jpg"));
+        final JLabel inter_design1 = new JLabel(createImageIcon("classic_ex.jpg"));
         inter_design1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         interior.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
                     int index = interior.locationToIndex(e.getPoint());
                     if (index == 0)
-                        inter_design1.setIcon(createImageIcon("images/classic_ex.jpg"));
+                        inter_design1.setIcon(createImageIcon("classic_ex.jpg"));
                     if (index == 1)
-                        inter_design1.setIcon(createImageIcon("images/modern_ex.jpg"));
+                        inter_design1.setIcon(createImageIcon("modern_ex.jpg"));
                 }
             }
         });
@@ -1854,7 +1856,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    difString = new JLabel("");
 	    panel3.add(difString);
 	    
-	    JLabel unibl = new JLabel(createImageIcon("images/uniform.jpg"));
+	    JLabel unibl = new JLabel(createImageIcon("uniform.jpg"));
         panel3.add(unibl);
         
         
@@ -2075,12 +2077,12 @@ public class TapiocaKing extends JApplet implements ActionListener
                 compareInterior();
                 compareIntPreview();
                 interBox.setSelectedIndex(interInd);
-                store_fridge.setIcon(createImageIcon("images/store_fridge_work.jpg"));
-                store_blender.setIcon(createImageIcon("images/store_blender_work.jpg"));
-                store_napkin.setIcon(createImageIcon("images/store_napkin_work.jpg"));
-                store_straw.setIcon(createImageIcon("images/store_straw_work.jpg"));
-                store_cups.setIcon(createImageIcon("images/store_cup_work.jpg"));
-                store_ing.setIcon(createImageIcon("images/store_ing_work.jpg"));
+                store_fridge.setIcon(createImageIcon("store_fridge_work.jpg"));
+                store_blender.setIcon(createImageIcon("store_blender_work.jpg"));
+                store_napkin.setIcon(createImageIcon("store_napkin_work.jpg"));
+                store_straw.setIcon(createImageIcon("store_straw_work.jpg"));
+                store_cups.setIcon(createImageIcon("store_cup_work.jpg"));
+                store_ing.setIcon(createImageIcon("store_ing_work.jpg"));
 				
 				//set the day counter in the date box
 				date.setText(""+d);
@@ -2306,9 +2308,9 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    
 	    JLabel supTitle;
 	    
-	    ImageIcon cupIcon = createImageIcon("images/supply_cup.jpg");
-	    ImageIcon strawIcon = createImageIcon("images/supply_straw.jpg");
-	    ImageIcon napIcon = createImageIcon("images/supply_napkin.jpg");
+	    ImageIcon cupIcon = createImageIcon("supply_cup.jpg");
+	    ImageIcon strawIcon = createImageIcon("supply_straw.jpg");
+	    ImageIcon napIcon = createImageIcon("supply_napkin.jpg");
 	    
 
     	//set the locations of the components
@@ -2814,13 +2816,13 @@ public class TapiocaKing extends JApplet implements ActionListener
             public void actionPerformed(ActionEvent e) 
             {
                 if (interBox.getSelectedIndex() == 0)
-                    inter_design2.setIcon(createImageIcon("images/classic_ex.jpg"));
+                    inter_design2.setIcon(createImageIcon("classic_ex.jpg"));
                 if (interBox.getSelectedIndex() == 1)
-                    inter_design2.setIcon(createImageIcon("images/modern_ex.jpg"));
+                    inter_design2.setIcon(createImageIcon("modern_ex.jpg"));
 				if (interBox.getSelectedIndex() == 2)
-                    inter_design2.setIcon(createImageIcon("images/space_ex.jpg"));
+                    inter_design2.setIcon(createImageIcon("space_ex.jpg"));
                 if (interBox.getSelectedIndex() == 3)
-                    inter_design2.setIcon(createImageIcon("images/hollywood_ex.jpg"));
+                    inter_design2.setIcon(createImageIcon("hollywood_ex.jpg"));
                 if (interBox.getSelectedIndex() == 4)
                 {
                 	inter_design2.setIcon(createImageIcon("imgaes/jungle_ex.jpg"));
@@ -3583,8 +3585,7 @@ public class TapiocaKing extends JApplet implements ActionListener
     
     protected void updatePicture(JLabel pic, String fname) {
         //Get the icon corresponding to the image.
-        ImageIcon icon = createImageIcon(
-                                    "images/" + fname);
+        ImageIcon icon = createImageIcon(fname);
         pic.setIcon(icon);
         pic.setToolTipText(fname);
         if (icon == null) {
@@ -3604,9 +3605,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             return null;
         }
     }
-	
-	 
-	
+
   	
   	//Keep track of the goals and check if the player reached the intended goal.
   	private void checkGoal (int current_date)
@@ -3863,7 +3862,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		            	events.getStyle("Red"));
 		            	sp_events.getVerticalScrollBar().getModel().setValue(
 			sp_events.getVerticalScrollBar().getModel().getMaximum());
-	                store_cups.setIcon(createImageIcon("images/store_cup_broke.jpg"));
+	                store_cups.setIcon(createImageIcon("store_cup_broke.jpg"));
 				}
 				catch (BadLocationException e)
 				{
@@ -3887,7 +3886,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		            	events.getStyle("Red"));
 		            	sp_events.getVerticalScrollBar().getModel().setValue(
 			sp_events.getVerticalScrollBar().getModel().getMaximum());
-	                store_napkin.setIcon(createImageIcon("images/store_napkin_broke.jpg"));
+	                store_napkin.setIcon(createImageIcon("store_napkin_broke.jpg"));
 				}
 				catch (BadLocationException e)
 				{
@@ -3911,7 +3910,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		            	events.getStyle("Red"));
 		            	sp_events.getVerticalScrollBar().getModel().setValue(
 			sp_events.getVerticalScrollBar().getModel().getMaximum());
-	                store_straw.setIcon(createImageIcon("images/store_straw_broke.jpg"));
+	                store_straw.setIcon(createImageIcon("store_straw_broke.jpg"));
 				}
 				catch (BadLocationException e)
 				{
@@ -3953,7 +3952,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 			            doc.insertString(doc.getLength(), msg, events.getStyle("Red"));
 			            sp_events.getVerticalScrollBar().getModel().setValue(
 			sp_events.getVerticalScrollBar().getModel().getMaximum());
-			            store_ing.setIcon(createImageIcon("images/store_ing_broke.jpg"));
+			            store_ing.setIcon(createImageIcon("store_ing_broke.jpg"));
 						
 					}
 					catch (BadLocationException e)
@@ -4113,7 +4112,7 @@ public class TapiocaKing extends JApplet implements ActionListener
                     expenses[sindex] += 50;
 	                moneyfield.setText(df.format(money));
 	                
-	                store_fridge.setIcon(createImageIcon("images/store_fridge_broke.jpg"));
+	                store_fridge.setIcon(createImageIcon("store_fridge_broke.jpg"));
 	                brokeFridge = d+1;
 	            }
                 break;
@@ -4142,7 +4141,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	                money -= 75;
                     expenses[sindex] += 75;
 	                moneyfield.setText(df.format(money));
-	                store_blender.setIcon(createImageIcon("images/store_blender_broke.jpg"));
+	                store_blender.setIcon(createImageIcon("store_blender_broke.jpg"));
 	                brokeBlend = d + 1;
 	            }
                 break;
@@ -4479,72 +4478,72 @@ public class TapiocaKing extends JApplet implements ActionListener
   	private void checkSupplies()
   	{
   	    if (cupsupply.getAmount() < 5)
-            store_cups.setIcon(createImageIcon("images/store_cup_broke.jpg"));
+            store_cups.setIcon(createImageIcon("store_cup_broke.jpg"));
         else
-            store_cups.setIcon(createImageIcon("images/store_cup_work.jpg"));
+            store_cups.setIcon(createImageIcon("store_cup_work.jpg"));
         
         if (ingsupply.getAmount() < 5)
-            store_ing.setIcon(createImageIcon("images/store_ing_broke.jpg"));
+            store_ing.setIcon(createImageIcon("store_ing_broke.jpg"));
         else
-            store_ing.setIcon(createImageIcon("images/store_ing_work.jpg"));
+            store_ing.setIcon(createImageIcon("store_ing_work.jpg"));
             
         if (strawsupply.getAmount() < 5)
-            store_straw.setIcon(createImageIcon("images/store_straw_broke.jpg"));
+            store_straw.setIcon(createImageIcon("store_straw_broke.jpg"));
         else
-            store_straw.setIcon(createImageIcon("images/store_straw_work.jpg"));
+            store_straw.setIcon(createImageIcon("store_straw_work.jpg"));
         
         if (napsupply.getAmount() < 5)
-            store_napkin.setIcon(createImageIcon("images/store_napkin_broke.jpg"));
+            store_napkin.setIcon(createImageIcon("store_napkin_broke.jpg"));
         else
-            store_napkin.setIcon(createImageIcon("images/store_napkin_work.jpg"));
+            store_napkin.setIcon(createImageIcon("store_napkin_work.jpg"));
   	}
   	
   	/* Find out the choice of uniform from user and reset the store graphics */
     private void compareUniform()
     {
         if (uniform == 0)
-            store_staff.setIcon(createImageIcon("images/store_staff_red.jpg"));
+            store_staff.setIcon(createImageIcon("store_staff_red.jpg"));
         if (uniform == 2)
-            store_staff.setIcon(createImageIcon("images/store_staff_blue.jpg"));
+            store_staff.setIcon(createImageIcon("store_staff_blue.jpg"));
         if (uniform == 1)
-            store_staff.setIcon(createImageIcon("images/store_staff_green.jpg"));
+            store_staff.setIcon(createImageIcon("store_staff_green.jpg"));
     }
     
     private void compareIntPreview()
     {
         if (interInd == 0)
-            inter_design2.setIcon(createImageIcon("images/classic_ex.jpg"));
+            inter_design2.setIcon(createImageIcon("classic_ex.jpg"));
         if (interInd == 1)
-            inter_design2.setIcon(createImageIcon("images/modern_ex.jpg"));
+            inter_design2.setIcon(createImageIcon("modern_ex.jpg"));
     }
     
     private void compareInterior()
     {
         if (interInd == 0)
         {
-            store_ceiling.setIcon(createImageIcon("images/store_classic_ceiling.jpg"));
-            store_table1.setIcon(createImageIcon("images/store_ctable1_empty.jpg"));
-            store_table2.setIcon(createImageIcon("images/store_ctable2_empty.jpg"));
-            store_table3.setIcon(createImageIcon("images/store_ctable3_empty.jpg"));
-            store_counter1.setIcon(createImageIcon("images/store_ccounter1.jpg"));
-            store_counter2.setIcon(createImageIcon("images/store_ccounter2.jpg"));
-            store_counter3.setIcon(createImageIcon("images/store_ccounter3a.jpg"));
-            store_customers.setIcon(createImageIcon("images/store_customer_ori.jpg"));
-            store_money.setIcon(createImageIcon("images/store_money_classic.jpg"));
-            store_rack.setIcon(createImageIcon("images/store_rack_classic.jpg"));
+            store_ceiling.setIcon(createImageIcon("store_classic_ceiling.jpg"));
+            store_table1.setIcon(createImageIcon("store_ctable1_empty.jpg"));
+            store_table2.setIcon(createImageIcon("store_ctable2_empty.jpg"));
+            store_table3.setIcon(createImageIcon("store_ctable3_empty.jpg"));
+            store_counter1.setIcon(createImageIcon("store_ccounter1.jpg"));
+            store_counter2.setIcon(createImageIcon("store_ccounter2.jpg"));
+            store_counter3.setIcon(createImageIcon("store_ccounter3a.jpg"));
+            store_customers.setIcon(createImageIcon("store_customer_ori.jpg"));
+            store_money.setIcon(createImageIcon("store_money_classic.jpg"));
+            store_rack.setIcon(createImageIcon("store_rack_classic.jpg"));
         }
         else if (interInd == 1)
         {
-            store_ceiling.setIcon(createImageIcon("images/store_modern_ceiling.jpg"));
-            store_table1.setIcon(createImageIcon("images/store_mtable1_empty.jpg"));
-            store_table2.setIcon(createImageIcon("images/store_mtable2_empty.jpg"));
-            store_table3.setIcon(createImageIcon("images/store_mtable3_empty.jpg"));
-            store_counter1.setIcon(createImageIcon("images/store_mcounter1.jpg"));
-            store_counter2.setIcon(createImageIcon("images/store_mcounter2.jpg"));
-            store_counter3.setIcon(createImageIcon("images/store_mcounter3.jpg"));
-            store_customers.setIcon(createImageIcon("images/store_customer_modern.jpg"));
-            store_money.setIcon(createImageIcon("images/store_money_modern.jpg"));
-            store_rack.setIcon(createImageIcon("images/store_rack_modern.jpg"));
+            store_ceiling.setIcon(createImageIcon("store_modern_ceiling.jpg"));
+            store_table1.setIcon(createImageIcon("store_mtable1_empty.jpg"));
+            store_table2.setIcon(createImageIcon("store_mtable2_empty.jpg"));
+            store_table3.setIcon(createImageIcon("store_mtable3_empty.jpg"));
+            store_counter1.setIcon(createImageIcon("store_mcounter1.jpg"));
+            store_counter2.setIcon(createImageIcon("store_mcounter2.jpg"));
+            store_counter3.setIcon(createImageIcon("store_mcounter3.jpg"));
+            store_customers.setIcon(createImageIcon("store_customer_modern.jpg"));
+            store_money.setIcon(createImageIcon("store_money_modern.jpg"));
+            store_rack.setIcon(createImageIcon("store_rack_modern.jpg"));
 
         }
         else if (interInd == 2)
@@ -4556,16 +4555,16 @@ public class TapiocaKing extends JApplet implements ActionListener
 				max_cus += 5;
 				diff_cus = max_cus - min_cus;
 			}
-            store_ceiling.setIcon(createImageIcon("images/store_space_ceiling.jpg"));
-            store_table1.setIcon(createImageIcon("images/store_mtable1_empty.jpg"));
-            store_table2.setIcon(createImageIcon("images/store_stable2_empty.jpg"));
-            store_table3.setIcon(createImageIcon("images/store_mtable3_empty.jpg"));
-            store_counter1.setIcon(createImageIcon("images/store_scounter1.jpg"));
-            store_counter2.setIcon(createImageIcon("images/store_scounter2.jpg"));
-            store_counter3.setIcon(createImageIcon("images/store_scounter3.jpg"));
-            store_customers.setIcon(createImageIcon("images/store_customer_space.jpg"));
-            store_money.setIcon(createImageIcon("images/store_money_space.jpg"));
-            store_rack.setIcon(createImageIcon("images/store_rack_space.jpg"));
+            store_ceiling.setIcon(createImageIcon("store_space_ceiling.jpg"));
+            store_table1.setIcon(createImageIcon("store_mtable1_empty.jpg"));
+            store_table2.setIcon(createImageIcon("store_stable2_empty.jpg"));
+            store_table3.setIcon(createImageIcon("store_mtable3_empty.jpg"));
+            store_counter1.setIcon(createImageIcon("store_scounter1.jpg"));
+            store_counter2.setIcon(createImageIcon("store_scounter2.jpg"));
+            store_counter3.setIcon(createImageIcon("store_scounter3.jpg"));
+            store_customers.setIcon(createImageIcon("store_customer_space.jpg"));
+            store_money.setIcon(createImageIcon("store_money_space.jpg"));
+            store_rack.setIcon(createImageIcon("store_rack_space.jpg"));
         }
         else if (interInd == 3)
         {
@@ -4576,16 +4575,16 @@ public class TapiocaKing extends JApplet implements ActionListener
                 max_cus += 7;
                 diff_cus = max_cus - min_cus;
             }
-            store_ceiling.setIcon(createImageIcon("images/store_hollywood_ceiling.jpg"));
-            store_table1.setIcon(createImageIcon("images/store_htable1_empty.jpg"));
-            store_table2.setIcon(createImageIcon("images/store_htable2_empty.jpg"));
-            store_table3.setIcon(createImageIcon("images/store_htable3_empty.jpg"));
-            store_counter1.setIcon(createImageIcon("images/store_hcounter1.jpg"));
-            store_counter2.setIcon(createImageIcon("images/store_hcounter2.jpg"));
-            store_counter3.setIcon(createImageIcon("images/store_hcounter3.jpg"));
-            store_customers.setIcon(createImageIcon("images/store_customer_ori.jpg"));
-            store_money.setIcon(createImageIcon("images/store_money_hollywood.jpg"));
-            store_rack.setIcon(createImageIcon("images/store_rack_hollywood.jpg"));
+            store_ceiling.setIcon(createImageIcon("store_hollywood_ceiling.jpg"));
+            store_table1.setIcon(createImageIcon("store_htable1_empty.jpg"));
+            store_table2.setIcon(createImageIcon("store_htable2_empty.jpg"));
+            store_table3.setIcon(createImageIcon("store_htable3_empty.jpg"));
+            store_counter1.setIcon(createImageIcon("store_hcounter1.jpg"));
+            store_counter2.setIcon(createImageIcon("store_hcounter2.jpg"));
+            store_counter3.setIcon(createImageIcon("store_hcounter3.jpg"));
+            store_customers.setIcon(createImageIcon("store_customer_ori.jpg"));
+            store_money.setIcon(createImageIcon("store_money_hollywood.jpg"));
+            store_rack.setIcon(createImageIcon("store_rack_hollywood.jpg"));
         }
         else if (interInd == 4)
         {
@@ -4596,16 +4595,16 @@ public class TapiocaKing extends JApplet implements ActionListener
                 max_cus += 10;
                 diff_cus = max_cus - min_cus;
             }
-            store_ceiling.setIcon(createImageIcon("images/store_jungle_ceiling.jpg"));
-            store_table1.setIcon(createImageIcon("images/store_jtable1_empty.jpg"));
-            store_table2.setIcon(createImageIcon("images/store_jtable2_empty.jpg"));
-            store_table3.setIcon(createImageIcon("images/store_jtable3_empty.jpg"));
-            store_counter1.setIcon(createImageIcon("images/store_jcounter1.jpg"));
-            store_counter2.setIcon(createImageIcon("images/store_jcounter2.jpg"));
-            store_counter3.setIcon(createImageIcon("images/store_jcounter3.jpg"));
-            store_customers.setIcon(createImageIcon("images/store_customer_ori.jpg"));
-            store_money.setIcon(createImageIcon("images/store_money_jungle.jpg"));
-            store_rack.setIcon(createImageIcon("images/store_rack_jungle.jpg"));
+            store_ceiling.setIcon(createImageIcon("store_jungle_ceiling.jpg"));
+            store_table1.setIcon(createImageIcon("store_jtable1_empty.jpg"));
+            store_table2.setIcon(createImageIcon("store_jtable2_empty.jpg"));
+            store_table3.setIcon(createImageIcon("store_jtable3_empty.jpg"));
+            store_counter1.setIcon(createImageIcon("store_jcounter1.jpg"));
+            store_counter2.setIcon(createImageIcon("store_jcounter2.jpg"));
+            store_counter3.setIcon(createImageIcon("store_jcounter3.jpg"));
+            store_customers.setIcon(createImageIcon("store_customer_ori.jpg"));
+            store_money.setIcon(createImageIcon("store_money_jungle.jpg"));
+            store_rack.setIcon(createImageIcon("store_rack_jungle.jpg"));
         }
     }
     
@@ -4814,12 +4813,12 @@ public class TapiocaKing extends JApplet implements ActionListener
 	        
 	        if (brokeFridge == d)
 	        {
-	           store_fridge.setIcon(createImageIcon("images/store_fridge_work.jpg"));
+	           store_fridge.setIcon(createImageIcon("store_fridge_work.jpg"));
 	           brokeFridge = -1;
 	        }
 	        if (brokeBlend ==d)
 	        {
-	           store_blender.setIcon(createImageIcon("images/store_blender_work.jpg"));
+	           store_blender.setIcon(createImageIcon("store_blender_work.jpg"));
 	           brokeBlend = -1;
 	        }
 	        
