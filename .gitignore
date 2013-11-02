@@ -1,0 +1,12 @@
+/images
+/sounds
+/images
+/sounds
+/sounds
+/sounds
+/sounds
+/images
+*.jpg
+*.au
+*.class
+/classes/*.class
