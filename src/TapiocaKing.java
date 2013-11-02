@@ -378,7 +378,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		
 		//initialize the songs, ONLY FOR BROWSER APPLET VERSION
 		
-		song = getAudioClip(getDocumentBase(), "sounds/NameYourFriends.au");
+		song = getAudioClip(getDocumentBase(), "sounds/looping_radio_mix.au");
 		song2 = getAudioClip(getDocumentBase(), "sounds/ChillSong.au");
 		song3 = getAudioClip(getDocumentBase(), "sounds/ProgHouse.au");
 		cashsong = getAudioClip(getDocumentBase(), "sounds/cash_register.au");
