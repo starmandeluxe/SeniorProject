@@ -6,14 +6,10 @@
  * @version 1.00 2007/10/14
  */
  
-import java.util.ArrayList;
-import javax.swing.table.AbstractTableModel;
-import java.util.EnumMap;
-import javax.swing.table.*;
-import javax.swing.event.*;
-import javax.swing.JTable;
 import java.util.*;
 import java.text.DecimalFormat;
+
+import javax.swing.table.DefaultTableModel;
 
 /*
  *
@@ -45,7 +41,6 @@ public class MenuTableModel
     public void addDrink(Products d)
     {
         drinks.add(d);
-        Vector row = new Vector();
         String pName = d.getName();
         String pCost = df.format(d.getCost());
         String pPrice = df.format(d.getPrice());
@@ -62,10 +57,6 @@ public class MenuTableModel
     
     public boolean ingsExist(Products p)
     {
-    	boolean flag = false;
-    	String name = p.getName();
-    	Double price = p.getPrice();
-    	Double cost = p.getCost();
     	Ingredients[] ings = p.getIngredients();
     	for (int i = 0; i < drinks.size(); i++)
     	{
