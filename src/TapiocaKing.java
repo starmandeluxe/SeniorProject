@@ -699,8 +699,8 @@ public class TapiocaKing extends JApplet implements ActionListener
 		body.setText("Tapioca King\n\n2007-2008\n by Alex Kort and Cecilia Tsoy" +
 		"\n\n CPE 491/492 Senior Project\nDr. Aaron Keen\nCal Poly San Luis Obispo\n\n\n\n"
 		+ "Special Thanks To:\nAlan Kort\nDerrek Karamanos\n\n\n" +
-		"Music from \"Gunbound\" Property of Softnyx, Co., Ltd.\n" +
-		"Music from \"Portal\" Property of Valve Corporation");
+		"Opening Music from \"Earthbound\" Property of Nintendo, Co., Ltd.\n" +
+		"Featuring Original Music Alex Kort");
 		
 		//specify alignment and color of the text area
 		body.setMargin(new Insets(50, 270, 50, 50));
