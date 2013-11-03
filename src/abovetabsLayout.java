@@ -43,10 +43,10 @@ public class abovetabsLayout implements LayoutManager {
 	        if (c.isVisible()) {c.setBounds(insets.left+45,insets.top+8,50,24);}
 	        //MenuButton
 	        c = parent.getComponent(2);
-	        if (c.isVisible()) {c.setBounds(insets.left+555,insets.top+48,150,24);}
+	        if (c.isVisible()) {c.setBounds(insets.left+545,insets.top+48,150,24);}
 	        //Total label + Dollar sign
 	        c = parent.getComponent(3);
-	        if (c.isVisible()) {c.setBounds(insets.left+535,insets.top+8,100,24);}
+	        if (c.isVisible()) {c.setBounds(insets.left+540,insets.top+8,100,24);}
 	        //Money Field
 	        c = parent.getComponent(4);
 	        if (c.isVisible()) {c.setBounds(insets.left+630,insets.top+8,65,24);}
@@ -77,11 +77,11 @@ public class abovetabsLayout implements LayoutManager {
 	        
 	        //Goal Label
 	        c = parent.getComponent(13);
-            if (c.isVisible()) {c.setBounds(insets.left+130,insets.top+8,50,24);}
+            if (c.isVisible()) {c.setBounds(insets.left+140,insets.top+8,50,24);}
             
             //Goal Field
             c = parent.getComponent(14);
-            if (c.isVisible()) {c.setBounds(insets.left+170,insets.top+8,350,24);}
+            if (c.isVisible()) {c.setBounds(insets.left+175,insets.top+8,330,24);}
             
             //Message Box (Text Area)
             c = parent.getComponent(15);

@@ -93,16 +93,27 @@ public class suppliesLayout implements LayoutManager
 	        
 	        //Cost Fields
 	        c = parent.getComponent(16);
-	        if (c.isVisible()) {c.setBounds(insets.left+430,insets.top+370,72,24);}
+	        if (c.isVisible()) {c.setBounds(insets.left+405,insets.top+370,52,24);}
 	        c = parent.getComponent(17);
-	        if (c.isVisible()) {c.setBounds(insets.left+262,insets.top+370,72,24);}
+	        if (c.isVisible()) {c.setBounds(insets.left+237,insets.top+370,52,24);}
 	        c = parent.getComponent(18);
-	        if (c.isVisible()) {c.setBounds(insets.left+94,insets.top+370,72,24);}
+	        if (c.isVisible()) {c.setBounds(insets.left+69,insets.top+370,52,24);}
 	        c = parent.getComponent(19);
-	        if (c.isVisible()) {c.setBounds(insets.left+590,insets.top+370,72,24);}
+	        if (c.isVisible()) {c.setBounds(insets.left+565,insets.top+370,52,24);}
 	        
 	        //supplies title label
 	        c = parent.getComponent(20);
 	        if (c.isVisible()) {c.setBounds(insets.left+24,insets.top+0,200,24);}
+	        
+	        
+	        //Discount Labels
+	        c = parent.getComponent(21);
+	        if (c.isVisible()) {c.setBounds(insets.left+126,insets.top+370,50,24);}
+	        c = parent.getComponent(22);
+	        if (c.isVisible()) {c.setBounds(insets.left+294,insets.top+370,50,24);}
+	        c = parent.getComponent(23);
+	        if (c.isVisible()) {c.setBounds(insets.left+462,insets.top+370,50,24);}
+	        c = parent.getComponent(24);
+	        if (c.isVisible()) {c.setBounds(insets.left+622,insets.top+370,50,24);}
 	    }
 	}

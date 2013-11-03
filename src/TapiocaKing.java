@@ -161,9 +161,9 @@ public class TapiocaKing extends JApplet implements ActionListener
    	static double money = 100;
    	static JTextField moneyfield;
    	
-   	double[] egoals = {500.00, 800.00, 1000.00, 2000.00};
-   	double[] mgoals = {700.00, 800.00, 1200.00, 2000.00};
-   	double[] hgoals = {650.00, 800.00, 1200.00, 2000.00};
+   	double[] egoals = {400.00, 700.00, 900.00, 1900.00};
+   	double[] mgoals = {600.00, 800.00, 1100.00, 1900.00};
+   	double[] hgoals = {650.00, 800.00, 1100.00, 1900.00};
    	double[] goals = new double[3];
    	
    	//only calculate the goals once!
@@ -311,7 +311,10 @@ public class TapiocaKing extends JApplet implements ActionListener
     boolean fxflag = true;
     
     //if true, stop //song 3, if false, stop //song 1
-    boolean songflag = false;
+    //boolean songflag = false;
+    
+    //indicates the currently playing song
+    int songflag = 1;
     
     //flag to check if a customer bought any drinks
     boolean boughtflag = false;
@@ -332,6 +335,12 @@ public class TapiocaKing extends JApplet implements ActionListener
     //Supplies Ingredients Icon
     ImageIcon ingIcon = createImageIcon("supply_ing.jpg");
     final JButton ings = new JButton("<html><CENTER>Purchase<br>Ingredients</CENTER></html>", ingIcon);
+    
+    //Discount labels for supply costs
+    JLabel discountLabel1;
+    JLabel discountLabel2;
+    JLabel discountLabel3;
+    JLabel discountLabel4;
    
     // Interior Design Preview Picture in Research Tab
     final JLabel inter_design2 = new JLabel(createImageIcon("classic_ex.jpg"));
@@ -374,6 +383,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	 */
 	public void init()
 	{
+		
 		money = 100.0;
 		
 		//initialize the songs, ONLY FOR BROWSER APPLET VERSION
@@ -388,7 +398,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		cupsupply = new Inventory(Ingredients.Cup, 20);
    		napsupply = new Inventory(Ingredients.Napkin, 20);
    		strawsupply = new Inventory(Ingredients.Straw, 20);
-   	 	ingsupply = new Inventory(Ingredients.General, 20);
+   	 	ingsupply = new Inventory(Ingredients.General, 60);
    	 	money = 100;
 		d = 0;
 		dCost = 0.0;
@@ -429,7 +439,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		cards.add(tuto5, TUT5);
 
 		add(BorderLayout.CENTER, cards);
-
+		setSize(710, 660);
 	}
 	
 	//reinitialize everything when starting a new game
@@ -439,6 +449,23 @@ public class TapiocaKing extends JApplet implements ActionListener
 		 * Important: reinitialize the underlying products
 		 * and other such data as well.
 		 */
+		if (song2 != null)
+		{
+			song2.stop();
+		}
+		if (song3 != null)
+		{
+			song3.stop();
+		}
+		
+		if (soundflag)
+		{
+			
+			if (song!= null)
+			{
+				song.loop();
+			}
+		}
 		
 		i1 = Ingredients.MilkTea; 
    		i2 = Ingredients.None; 
@@ -447,7 +474,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		cupsupply = new Inventory(Ingredients.Cup, 20);
    		napsupply = new Inventory(Ingredients.Napkin, 20);
    		strawsupply = new Inventory(Ingredients.Straw, 20);
-   	 	ingsupply = new Inventory(Ingredients.General, 20);
+   	 	ingsupply = new Inventory(Ingredients.General, 60);
 		money = 100;
 		d = 0;
 		dCost = 0.0;
@@ -551,12 +578,15 @@ public class TapiocaKing extends JApplet implements ActionListener
 				{
 					musicCheck.setText("Music is Off");
 					soundflag = false;
-					if (songflag)
+					//if song 3 is playing, stop it
+					if (songflag == 3)
 					{
 						if (song3 != null)
-							song3.stop();	
+							song3.stop();
+						
 					}	
-					else
+					//if song2 is playing, stop it
+					else if (songflag == 2)
 					{
 						if (song2 != null)
 							song2.stop();
@@ -567,12 +597,14 @@ public class TapiocaKing extends JApplet implements ActionListener
 				{
 					musicCheck.setText("Music is On");
 					soundflag = true;
-					if (songflag)
+					//if song 3 was playing, loop it
+					if (songflag == 3)
 					{
 						if (song3 != null)
 							song3.loop();
 					}
-					else
+					//if song 2 was playing, loop it
+					else if (songflag == 2)
 					{
 						if (song2 != null)
 							song2.loop();
@@ -786,9 +818,13 @@ public class TapiocaKing extends JApplet implements ActionListener
             {
                 
                 if (ingameflag == false)
+                {
                 	((CardLayout)cards.getLayout()).show(cards, MENU);
+                }
                 else
+                {
                 	((CardLayout)cards.getLayout()).show(cards, INMENU);
+                }
                 
             }
         });
@@ -1347,7 +1383,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				songflag = false;
+				songflag = 3;
 				((CardLayout)cards.getLayout()).show(cards, OPTIONS);
 			}
 		});
@@ -1511,6 +1547,19 @@ public class TapiocaKing extends JApplet implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				//stop the menu song, song2, and resume song3 for ingame
+				if (soundflag)
+				{
+					if (song2 != null)
+					{
+						song2.stop();
+					}
+					if (song3 != null)
+					{
+						song3.loop();
+						songflag = 3;
+					}
+				}
 				((CardLayout)cards.getLayout()).show(cards, INTERFACE);
 			}
 		});
@@ -1639,7 +1688,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				songflag = true;
+				songflag = 2;
 				((CardLayout)cards.getLayout()).show(cards, OPTIONS);
 			}
 		});
@@ -1684,12 +1733,18 @@ public class TapiocaKing extends JApplet implements ActionListener
 				
 				if (n == JOptionPane.YES_OPTION)
 				{
+					//stop the current song and play the title song
 					if (soundflag)
 					{
 						if (song3 != null)
 							song3.stop();
+						if (song2 != null)
+							song2.stop();
+						
 						if (song != null)
+						{
 							song.loop();
+						}
 					}
                     pause.setEnabled(false);
 					initNewGame();
@@ -1888,7 +1943,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 						cupsupply = new Inventory(Ingredients.Cup, 50);
 				   		napsupply = new Inventory(Ingredients.Napkin, 50);
 				   		strawsupply = new Inventory(Ingredients.Straw, 50);
-				   	 	ingsupply = new Inventory(Ingredients.General, 50);
+				   	 	ingsupply = new Inventory(Ingredients.General, 80);
 				   	 	
 				   	 	cupamt.setText(Integer.toString(cupsupply.getAmount()));
 					   	strawamt.setText(Integer.toString(strawsupply.getAmount()));
@@ -1896,9 +1951,9 @@ public class TapiocaKing extends JApplet implements ActionListener
 					   	ingamt.setText(Integer.toString(ingsupply.getAmount()));
 					   	
                         //change the cost of supplies
-                        tmodel.setCupCost(.05);
-                        tmodel.setStrawCost(.02);
-                        tmodel.setNapkinCost(.02);
+                        tmodel.setCupCost(.10);
+                        tmodel.setStrawCost(.05);
+                        tmodel.setNapkinCost(.05);
                         
                         //cost of napkins
                         napcalc = tmodel.getInCost().get(Ingredients.Napkin)
@@ -1924,9 +1979,9 @@ public class TapiocaKing extends JApplet implements ActionListener
 						difString.setText("Business as Usual");
 						
 						//change the cost of supplies
-						tmodel.setCupCost(.07);
-						tmodel.setStrawCost(.03);
-						tmodel.setNapkinCost(.03);
+						tmodel.setCupCost(.12);
+						tmodel.setStrawCost(.07);
+						tmodel.setNapkinCost(.07);
 						
 						//cost of napkins
 						napcalc = tmodel.getInCost().get(Ingredients.Napkin)
@@ -1956,10 +2011,15 @@ public class TapiocaKing extends JApplet implements ActionListener
 						max_cus = 7;
 						diff_cus = 7;
 						
+						cupsupply = new Inventory(Ingredients.Cup, 20);
+				   		napsupply = new Inventory(Ingredients.Napkin, 20);
+				   		strawsupply = new Inventory(Ingredients.Straw, 20);
+				   	 	ingsupply = new Inventory(Ingredients.General, 20);
+						
 						//change the cost of supplies
-						tmodel.setCupCost(.10);
-						tmodel.setStrawCost(.05);
-						tmodel.setNapkinCost(.05);
+						tmodel.setCupCost(.15);
+						tmodel.setStrawCost(.10);
+						tmodel.setNapkinCost(.10);
 						
 						//cost of napkins
 						napcalc = tmodel.getInCost().get(Ingredients.Napkin)
@@ -1978,11 +2038,6 @@ public class TapiocaKing extends JApplet implements ActionListener
 							*Double.parseDouble((String)cupcombo.getSelectedItem());
 				        costField3.setText(df.format(cupcalc));
 				        costField3.setEditable(false);
-				        
-				        cupsupply = new Inventory(Ingredients.Cup, 0);
-				   		napsupply = new Inventory(Ingredients.Napkin, 0);
-				   		strawsupply = new Inventory(Ingredients.Straw, 0);
-				   	 	ingsupply = new Inventory(Ingredients.General, 0);
 				   	 	
 				   	 	cupamt.setText(Integer.toString(cupsupply.getAmount()));
 					   	strawamt.setText(Integer.toString(strawsupply.getAmount()));
@@ -2086,7 +2141,8 @@ public class TapiocaKing extends JApplet implements ActionListener
 				
 				//set the day counter in the date box
 				date.setText(""+d);
-                goalField.setText("Have more than $500.00 by the end of Day 20.");
+				goalField.setText("Have more than $" + 
+		  	        	df.format(goals[0]) + " by the end of Day 20.");
                 
                 setupTimers();
         	}
@@ -2199,7 +2255,19 @@ public class TapiocaKing extends JApplet implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{	
+				if (soundflag)
+				{
+					if (song3 != null)
+					{
+						song3.stop();
+					}
+					if (song2 != null)
+					{
+						song2.loop();
+					}
+				}
 				((CardLayout)cards.getLayout()).show(cards, INMENU);
+				
 			}
 		});
 		
@@ -2223,10 +2291,11 @@ public class TapiocaKing extends JApplet implements ActionListener
 		createPromotionTab(sub5);
 		
 		tp.addTab("Store", sub1);
+		tp.addTab("Research", sub4);
 		tp.addTab("Supplies", sub2);
 		tp.addTab("Menu", sub3);
-		tp.addTab("Research", sub4);
 		tp.addTab("Promotion", sub5);
+		
 		
 		return panel4;
 	}
@@ -2301,10 +2370,12 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    JLabel reorder3;
 	    JLabel reorder4;
 	    
+	    //text before the cost comboboxes
 	    JLabel costLabel1;
 	    JLabel costLabel2;
 	    JLabel costLabel3;
 	    JLabel costLabel4;
+
 	    
 	    JLabel supTitle;
 	    
@@ -2410,23 +2481,20 @@ public class TapiocaKing extends JApplet implements ActionListener
         tab.add(ingcombo);
         
         //define cost calculating fields
-        costLabel1 = new JLabel("Cost:      $");
+        costLabel1 = new JLabel("Cost:  $");
         tab.add(costLabel1);
 
-        costLabel2 = new JLabel("Cost:      $");
+        costLabel2 = new JLabel("Cost:  $");
         tab.add(costLabel2);
 
-        costLabel3 = new JLabel("Cost:      $");
+        costLabel3 = new JLabel("Cost:  $");
         tab.add(costLabel3);
 
-        costLabel4 = new JLabel("Cost:      $");
+        costLabel4 = new JLabel("Cost:  $");
         tab.add(costLabel4);
 
-		
-		
-		
-		//cost of napkins
 
+		//cost of napkins
         costField1 = new JTextField(df.format(napcalc));
         tab.add(costField1);
 
@@ -2439,7 +2507,6 @@ public class TapiocaKing extends JApplet implements ActionListener
         tab.add(costField3);
 
 		//cost of tea
-		
 		ingcalc = calculateIngSetCost() * Double.parseDouble((String)ingcombo.getSelectedItem());
         costField4 = new JTextField(df.format(ingcalc));
         costField4.setEditable(false);
@@ -2448,6 +2515,31 @@ public class TapiocaKing extends JApplet implements ActionListener
         //add title label
         supTitle = new JLabel("Order More Supplies Here");
         tab.add(supTitle);
+        
+        //define discount labels
+        discountLabel1 = new JLabel("");
+        discountLabel1.setForeground(Color.red);
+        //default to not show
+        discountLabel1.setVisible(false);
+        tab.add(discountLabel1);
+
+        discountLabel2 = new JLabel("");
+        discountLabel2.setForeground(Color.red);
+      //default to not show
+        discountLabel2.setVisible(false);
+        tab.add(discountLabel2);
+
+        discountLabel3 = new JLabel("");
+        discountLabel3.setForeground(Color.red);
+      //default to not show
+        discountLabel3.setVisible(false);
+        tab.add(discountLabel3);
+
+        discountLabel4 = new JLabel("");
+        discountLabel4.setForeground(Color.red);
+      //default to not show
+        discountLabel4.setVisible(false);
+        tab.add(discountLabel4);
         
         //tab functionality
         
@@ -2458,24 +2550,130 @@ public class TapiocaKing extends JApplet implements ActionListener
 			public void itemStateChanged(ItemEvent e)
 			{
 				cupcalc = tmodel.getInCost().get(Ingredients.Cup)*Double.parseDouble((String)cupcombo.getSelectedItem());
+				
+				//hide discount if not enough supply ordered
+				if (Integer.parseInt((String)cupcombo.getSelectedItem()) == 50 
+						|| Integer.parseInt((String)cupcombo.getSelectedItem()) == 25)
+				{
+					discountLabel1.setVisible(false);
+				}
+				//if the selected amount of cups is 100, give a  1% discount
+				if (Integer.parseInt((String)cupcombo.getSelectedItem()) == 100)
+				{
+					discountLabel1.setText("1% OFF");
+					discountLabel1.setVisible(true);
+					cupcalc -= cupcalc * .01;
+					
+				}
+				//if the selected amount of cups is 200, give a  2% discount
+				else if (Integer.parseInt((String)cupcombo.getSelectedItem()) == 200)
+				{
+					discountLabel1.setText("2% OFF");
+					discountLabel1.setVisible(true);
+					cupcalc -= cupcalc * .02;
+				}
+				//if the selected amount of cups is 500, give a  5% discount
+				else if (Integer.parseInt((String)cupcombo.getSelectedItem()) == 500)
+				{
+					discountLabel1.setText("5% OFF");
+					discountLabel1.setVisible(true);
+					cupcalc -= cupcalc * .05;
+				}
+				//if the selected amount of cups is 1000, give a  10% discount
+				else if (Integer.parseInt((String)cupcombo.getSelectedItem()) == 1000)
+				{
+					discountLabel1.setText("10% OFF");
+					discountLabel1.setVisible(true);
+					cupcalc -= cupcalc * .10;
+				}
+				
 				costField3.setText(df.format(cupcalc));
 			}
 		});
 		
+        //calculate straws current cost
 		strawcombo.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				strawcalc = tmodel.getInCost().get(Ingredients.Straw)*Double.parseDouble((String)strawcombo.getSelectedItem());
+				
+				//hide discount if not enough supply ordered
+				if (Integer.parseInt((String)strawcombo.getSelectedItem()) == 50 
+						|| Integer.parseInt((String)strawcombo.getSelectedItem()) == 25)
+				{
+					discountLabel2.setVisible(false);
+				}
+				//if the selected amount of straws is 100, give a  1% discount
+				if (Integer.parseInt((String)strawcombo.getSelectedItem()) == 100)
+				{
+					discountLabel2.setText("1% OFF");
+					discountLabel2.setVisible(true);
+					strawcalc -= strawcalc * .01;
+					
+				}
+				//if the selected amount of straws is 200, give a  2% discount
+				else if (Integer.parseInt((String)strawcombo.getSelectedItem()) == 200)
+				{
+					discountLabel2.setText("2% OFF");
+					discountLabel2.setVisible(true);
+					strawcalc -= strawcalc * .02;
+				}
+				//if the selected amount of straws is 500, give a  5% discount
+				else if (Integer.parseInt((String)strawcombo.getSelectedItem()) == 500)
+				{
+					discountLabel2.setText("5% OFF");
+					discountLabel2.setVisible(true);
+					strawcalc -= strawcalc * .05;
+				}
+				//if the selected amount of straws is 1000, give a  10% discount
+				else if (Integer.parseInt((String)strawcombo.getSelectedItem()) == 1000)
+				{
+					discountLabel2.setText("10% OFF");
+					discountLabel2.setVisible(true);
+					strawcalc -= strawcalc * .10;
+				}
+				
 				costField2.setText(df.format(strawcalc));
 			}
 		});
 		
+		//calculate napkins current cost
 		napcombo.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				napcalc = tmodel.getInCost().get(Ingredients.Napkin)*Double.parseDouble((String)napcombo.getSelectedItem());
+				
+				//hide discount if not enough supply ordered
+				if (Integer.parseInt((String)napcombo.getSelectedItem()) == 100 
+						|| Integer.parseInt((String)napcombo.getSelectedItem()) == 200)
+				{
+					discountLabel3.setVisible(false);
+				}
+				//if the selected amount of napkins is 300, give a  3% discount
+				if (Integer.parseInt((String)napcombo.getSelectedItem()) == 300)
+				{
+					discountLabel3.setText("3% OFF");
+					discountLabel3.setVisible(true);
+					napcalc -= napcalc * .03;
+					
+				}
+				//if the selected amount of napkins is 500, give a  5% discount
+				else if (Integer.parseInt((String)napcombo.getSelectedItem()) == 500)
+				{
+					discountLabel3.setText("5% OFF");
+					discountLabel3.setVisible(true);
+					napcalc -= napcalc * .05;
+				}
+				//if the selected amount of napkins is 1000, give a  10% discount
+				else if (Integer.parseInt((String)napcombo.getSelectedItem()) == 1000)
+				{
+					discountLabel3.setText("10% OFF");
+					discountLabel3.setVisible(true);
+					napcalc -= napcalc * .10;
+				}
+				
 				costField1.setText(df.format(napcalc));
 			}
 		});
@@ -3120,30 +3318,30 @@ public class TapiocaKing extends JApplet implements ActionListener
         tab.setLayout(customLayout);
 	   
         new JLabel("Flyers will be posted around your neighborhood");
-        new JLabel("for 7 days in a cost of $20.00");
+        new JLabel("for 5 days in a cost of $50.00");
         
-        JButton flyerButton = new JButton("Buy Flyers for $20.00");
+        JButton flyerButton = new JButton("Buy Flyers for $50.00");
         flyerButton.setFont(new Font("Tahoma", Font.BOLD, 12));
         tab.add(flyerButton);
         
         new JLabel("Coupons will be given to customers ");
-        new JLabel("after each purchase for 7 days in a cost of $50.00");
+        new JLabel("after each purchase for 5 days in a cost of $80.00");
         
-        JButton couponButton = new JButton("Buy Coupons for $50.00");
+        JButton couponButton = new JButton("Buy Coupons for $80.00");
         couponButton.setFont(new Font("Tahoma", Font.BOLD, 12));
         tab.add(couponButton);
         
         new JLabel("Your store's advertisements will appear ");
-        new JLabel("in popular magazines for 7 days in a cost of $100.00");
+        new JLabel("in popular magazines for 5 days in a cost of $300.00");
 
-        JButton adButton = new JButton("Buy Magazine Ads for $100.00");
+        JButton adButton = new JButton("Buy Magazine Ads for $300.00");
         adButton.setFont(new Font("Tahoma", Font.BOLD, 12));
         tab.add(adButton);
         
         new JLabel("Your store will appear in TV commercials");
-        new JLabel("for 7 days in a cost of $300.00");
+        new JLabel("for 5 days in a cost of $500.00");
         
-        JButton comButton = new JButton("Buy TV Commercials for $300.00");
+        JButton comButton = new JButton("Buy TV Commercials for $500.00");
         comButton.setFont(new Font("Tahoma", Font.BOLD, 12));
         tab.add(comButton);
         
@@ -3167,18 +3365,18 @@ public class TapiocaKing extends JApplet implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 
-                if (money < 80)
+                if (money < 200)
                 {
                 	//if not enough money to purchase flyers, do
                     //not subtract funds and issue an error message
                     JOptionPane.showMessageDialog(drinkDialog,
-                        "This Promotion Plan Requires a Fund Surplus of at least $80",
+                        "This Promotion Plan Requires a Fund Surplus of at least $200",
                         "Promotion Plan Purchase Failed",
                         JOptionPane.ERROR_MESSAGE);
                         return;
                 }
-                money -= 20;
-                expenses[sindex] += 20;
+                money -= 50;
+                expenses[sindex] += 50;
                 moneyfield.setText(df.format(money));
                     
                 JOptionPane.showMessageDialog(drinkDialog,
@@ -3189,7 +3387,7 @@ public class TapiocaKing extends JApplet implements ActionListener
                 min_cus = min_cus * 1.2f;
                 max_cus = max_cus * 1.2f;
                 diff_cus = max_cus - min_cus;
-                flyer_flag = d + 7;    
+                flyer_flag = d + 5;    
                 
                 try
 				{
@@ -3209,7 +3407,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    	public void mouseEntered(MouseEvent e)
 	    	{
 	    		desc1.setText("Flyers will be posted around your neighborhood");
-	    		desc2.setText("for 7 days for a cost of $20.00");
+	    		desc2.setText("for 5 days for a cost of $50.00");
 	    	}    	
 	    	public void mouseExited(MouseEvent e)
 	    	{
@@ -3234,18 +3432,18 @@ public class TapiocaKing extends JApplet implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 
-                if (money < 100)
+                if (money < 500)
                 {
                     //if not enough money to purchase coupons, do
                     //not subtract funds and issue an error message
                     JOptionPane.showMessageDialog(drinkDialog,
-                        "This Promotion Plan Requires a Fund Surplus of at least $100",
+                        "This Promotion Plan Requires a Fund Surplus of at least $500",
                         "Promotion Plan Purchase Failed",
                         JOptionPane.ERROR_MESSAGE);
                         return;
                 }
-                money -= 50;
-                expenses[sindex] += 50;
+                money -= 80;
+                expenses[sindex] += 80;
                 moneyfield.setText(df.format(money));
                     
                 JOptionPane.showMessageDialog(drinkDialog,
@@ -3256,7 +3454,7 @@ public class TapiocaKing extends JApplet implements ActionListener
                 min_cus = min_cus * 1.5f;
                 max_cus = max_cus * 1.5f;
                 diff_cus = max_cus - min_cus;
-                coupon_flag = d + 7; 
+                coupon_flag = d + 5; 
                 
                 try
 				{
@@ -3276,7 +3474,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    	public void mouseEntered(MouseEvent e)
 	    	{
 	    		desc1.setText("Coupons will be given to customers");
-	    		desc2.setText("after each purchase for 7 days for a cost of $50.00");
+	    		desc2.setText("after each purchase for 5 days for a cost of $80.00");
 	    	}    	
 	    	public void mouseExited(MouseEvent e)
 	    	{
@@ -3301,18 +3499,18 @@ public class TapiocaKing extends JApplet implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 
-                if (money < 200)
+                if (money < 1000)
                 {
                     //if not enough money to purchase ads, do
                     //not subtract funds and issue an error message
                     JOptionPane.showMessageDialog(drinkDialog,
-                        "This Promotion Plan Requires a Fund Surplus of at least $200",
+                        "This Promotion Plan Requires a Fund Surplus of at least $1000",
                         "Promotion Plan Purchase Failed",
                         JOptionPane.ERROR_MESSAGE);
                         return;
                 }
-                money -= 100;
-                expenses[sindex] += 100;
+                money -= 300;
+                expenses[sindex] += 300;
                 moneyfield.setText(df.format(money));
                     
                  JOptionPane.showMessageDialog(drinkDialog,
@@ -3323,7 +3521,7 @@ public class TapiocaKing extends JApplet implements ActionListener
                 min_cus = min_cus * 1.75f;
                 max_cus = max_cus * 1.75f;
                 diff_cus = max_cus - min_cus;
-                magazine_flag = d + 7;
+                magazine_flag = d + 5;
                 
                 try
 				{
@@ -3343,7 +3541,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    	public void mouseEntered(MouseEvent e)
 	    	{
 	    		desc1.setText("Your store's advertisements will appear");
-	    		desc2.setText("in popular magazines for 7 days for a cost of $100.00");
+	    		desc2.setText("in popular magazines for 5 days for a cost of $300.00");
 	    	}    	
 	    	public void mouseExited(MouseEvent e)
 	    	{
@@ -3368,18 +3566,18 @@ public class TapiocaKing extends JApplet implements ActionListener
             public void actionPerformed(ActionEvent e)
             {
                 
-                if (money < 500)
+                if (money < 1500)
                 {
                     //if not enough money to purchase commercial, do
                     //not subtract funds and issue an error message
                     JOptionPane.showMessageDialog(drinkDialog,
-                        "This Promotion Plan Requires a Fund Surplus of at least $500",
+                        "This Promotion Plan Requires a Fund Surplus of at least $1500",
                         "Promotion Plan Purchase Failed",
                         JOptionPane.ERROR_MESSAGE);
                         return;
                 }
-                money -= 300;
-                expenses[sindex] += 300;
+                money -= 500;
+                expenses[sindex] += 500;
                 moneyfield.setText(df.format(money));
                     
                 JOptionPane.showMessageDialog(drinkDialog,
@@ -3390,7 +3588,7 @@ public class TapiocaKing extends JApplet implements ActionListener
                 min_cus = min_cus * 2;
                 max_cus = max_cus * 2;
                 diff_cus = max_cus - min_cus;
-                tv_flag = d + 7;
+                tv_flag = d + 5;
                 
                 try
 				{
@@ -3410,7 +3608,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    	public void mouseEntered(MouseEvent e)
 	    	{
 	    		desc1.setText("Your store will appear in a TV commercial");
-	    		desc2.setText("for 7 days for a cost of $300.00");
+	    		desc2.setText("for 5 days for a cost of $500.00");
 	    	}    	
 	    	public void mouseExited(MouseEvent e)
 	    	{
@@ -3613,31 +3811,63 @@ public class TapiocaKing extends JApplet implements ActionListener
   		if (goal1flag == false)
   		{
   			goal1flag = true;
+  			//set the first goal to be the amount plus your current funds
   			goals[0] += money;
   		}
-  		
+  		//second goal
   	    if (current_date < 21)
   	    {
   	        goalField.setText("Have more than $" + 
   	        	df.format(goals[0]) + " by the end of Day 20.");
   	    }
+  	    
   	    else if (current_date == 21)
   	    {
-  	        if (money >= goals[0])
-  	        {
-  	        	if (goal2flag == false)
+  	    	//check if first goal was reached on day 21
+  	    	if (money >= goals[1])
+            {
+                JOptionPane.showMessageDialog(drinkDialog,
+                        "Congratulations! You have reached the goal!\n"+
+                            "Your next goal is to have at least 10 " + 
+                            "drinks on menu by the end of Day 30.",
+                        "Goal Reached",
+                        JOptionPane.INFORMATION_MESSAGE);
+                goalField.setText("Have at least 10 drinks on menu by the end of Day 30.");
+            }
+            else 
+            {
+                JOptionPane.showMessageDialog(drinkDialog,
+                        "Since you have not reached the goal, your business failed.\n "+
+                            "Try again!",
+                        "Game Over",
+                        JOptionPane.ERROR_MESSAGE);
+                initNewGame(); 
+            }   
+            
+  	    } 
+  	    else if ((current_date > 20) && (current_date < 31))
+  	    {
+  	    	goalField.setText("Have at least 10 drinks on menu by the end of Day 30.");
+  	    }
+  	    else if (current_date == 31)
+  	    {
+  	    	//check if 10 drinks on the menu was reached, if not fail the game
+  	    	if (table.getRowCount() > 9)
+            {
+            	if (goal3flag == false)
 		  		{
-		  			goal2flag = true;
-		  			goals[1] += money;
+		  			goal3flag = true;
+		  			goals[2] += money;
 		  		}
+            	
                 JOptionPane.showMessageDialog(drinkDialog,
                         "Congratulations! You have reached the goal!\n"+
                             "Your next goal is to have more than $" + 
-                            df.format(goals[1]) + " by the end of Day 30.",
+                            df.format(goals[1]) + " by the end of Day 40.",
                         "Goal Reached",
                         JOptionPane.INFORMATION_MESSAGE);
                 goalField.setText("Have more than $" + 
-                	df.format(goals[1]) + " by the end of Day 30.");
+                	df.format(goals[1]) + " by the end of Day 40.");
   	        }
   	        else 
   	        {
@@ -3648,47 +3878,21 @@ public class TapiocaKing extends JApplet implements ActionListener
                         JOptionPane.ERROR_MESSAGE);
                     initNewGame();    
   	        }
-            
-  	    }
-  	    else if ((current_date > 20) && (current_date < 31))
-  	    {
-  	    	
-            goalField.setText("Have more than $" + 
-            	df.format(goals[1]) + " by the end of Day 30.");
-  	    }
-  	    else if (current_date == 31)
-  	    {
-            if (money >= goals[1])
-            {
-                JOptionPane.showMessageDialog(drinkDialog,
-                        "Congratulations! You have reached the goal!\n"+
-                            "Your next goal is to have at least 10 " + 
-                            "drinks on menu by the end of Day 40.",
-                        "Goal Reached",
-                        JOptionPane.INFORMATION_MESSAGE);
-                goalField.setText("Have at least 10 drinks on menu by the end of Day 40.");
-            }
-            else 
-            {
-                JOptionPane.showMessageDialog(drinkDialog,
-                        "Since you have not reached the goal, your business failed.\n "+
-                            "Try again!",
-                        "Game Over",
-                        JOptionPane.ERROR_MESSAGE);
-                initNewGame(); 
-            }
   	    }
         else if ((current_date > 30) && (current_date < 41)){
-            goalField.setText("Have at least 10 drinks on menu by the end of Day 40.");
+        	goalField.setText("Have more than $" + 
+                	df.format(goals[1]) + " by the end of Day 40.");
+            
         }
         else if (current_date == 41)
         {
-            if (table.getRowCount() > 9)
-            {
-            	if (goal3flag == false)
+            //goal check for success on day 41
+        	if (money >= goals[0])
+  	        {
+  	        	if (goal2flag == false)
 		  		{
-		  			goal3flag = true;
-		  			goals[2] += money;
+		  			goal2flag = true;
+		  			goals[1] += money;
 		  		}
                 JOptionPane.showMessageDialog(drinkDialog,
                         "Congratulations! You have reached the goal!\n"+
@@ -3709,6 +3913,7 @@ public class TapiocaKing extends JApplet implements ActionListener
                 initNewGame();
             }
         }
+  	    //goal 4
         else if ((current_date >40) && (current_date < 51))
         {
             goalField.setText("Have more than $" + 
@@ -3716,6 +3921,7 @@ public class TapiocaKing extends JApplet implements ActionListener
         }
         else if (current_date == 51)
         {
+        	//check if goal 4 was reached
             if (money >= goals[2])
             {
             	if (goal4flag == false)
@@ -3741,12 +3947,14 @@ public class TapiocaKing extends JApplet implements ActionListener
                 initNewGame();
             }
         }
+  	    //goal 5
         else if ((current_date >50) && (current_date < 61))
         {
             goalField.setText("Have more than $" + df.format(goals[3]) + " by the end of Day 60.");
         }
         else if (current_date == 61)
         {
+        	//check if goal 5 was reached
             if (money >= goals[3])
             {
                 JOptionPane.showMessageDialog(drinkDialog,
@@ -3794,7 +4002,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 		//setup the day counting timer
 		//increments the day each iteration
 		
-        tDate = new Timer(60000, new tDateListener());
+        tDate = new Timer(30000, new tDateListener());
 		tDate.setInitialDelay(0);
 		tDate.start();
 				
@@ -3882,7 +4090,7 @@ public class TapiocaKing extends JApplet implements ActionListener
 	            {
 	                walks[sindex] += 1;
 		            doc.insertString(doc.getLength(), 
-		            	"Alert: There aren't enough napkins to make another drink!\n", 
+		            	"Alert: You're out of napkins. The customers are uneasy!\n", 
 		            	events.getStyle("Red"));
 		            	sp_events.getVerticalScrollBar().getModel().setValue(
 			sp_events.getVerticalScrollBar().getModel().getMaximum());
@@ -4106,10 +4314,11 @@ public class TapiocaKing extends JApplet implements ActionListener
             case 0:
             	if (money >= 100)
                 {
+            		double lostfunds = money*.20;
 	                str = "The store's fridge " +
-	                "went down and needs maintenance! -$50\n";
-	                money -= 50;
-                    expenses[sindex] += 50;
+	                "went down and needs maintenance! -$" + lostfunds + "\n";
+	                money -= lostfunds;
+                    expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
 	                
 	                store_fridge.setIcon(createImageIcon("store_fridge_broke.jpg"));
@@ -4137,9 +4346,10 @@ public class TapiocaKing extends JApplet implements ActionListener
             case 2:
             	if (money >= 100)
                 {
-	                str = "The store's blender broke! -$50\n";
-	                money -= 75;
-                    expenses[sindex] += 75;
+            		double lostfunds = money*.15;
+	                str = "The store's blenders broke! -$" + lostfunds + "\n";
+	                money -= lostfunds;
+                    expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
 	                store_blender.setIcon(createImageIcon("store_blender_broke.jpg"));
 	                brokeBlend = d + 1;
@@ -4148,26 +4358,29 @@ public class TapiocaKing extends JApplet implements ActionListener
             case 3:
             	if (ingsupply.getAmount() >= 85)
                 {
-	                str = "Some ingredients became spoiled! -20 Ingredients\n";
-                    ingsupply.used(20);
+            		int lostings = (int) (ingsupply.getAmount() * .2);
+	                str = "Some ingredients became spoiled! -" + lostings + " Ingredients\n";
+                    ingsupply.used(lostings);
                     ingamt.setText(Integer.toString(ingsupply.getAmount()));
                 }
                 break;
             case 4:
             	if (money >= 150)
                 {
-	                str = "There was an earthquake! -$100\n";
-	                money -= 100;
-                    expenses[sindex] += 100;
+            		double lostfunds = money*.2;
+	                str = "There was an earthquake! -$" + lostfunds + "\n";
+	                money -= lostfunds;
+                    expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
 	            }
                 break;
             case 5:
             	if (money >= 150)
                 {
-	                str = "A burgler broke into the store and stole $100!\n";
-	                money -= 100;
-                    expenses[sindex] += 100;
+            		double stolenfunds = money*.15;
+	                str = "A burglar gave you the stickup and stole $" + stolenfunds + "\n";
+	                money -= stolenfunds;
+                    expenses[sindex] += stolenfunds;
 	                moneyfield.setText(df.format(money));
 	            }
                 break;
@@ -4192,9 +4405,10 @@ public class TapiocaKing extends JApplet implements ActionListener
             case 7:
             	if (money >= 100)
                 {
-	                str = "Some punks vandalized the store! -$50\n";
-	                money -= 50;
-                    expenses[sindex] += 50;
+            		double lostfunds = money*.2;
+	                str = "Some punks vandalized the store! -$" + lostfunds + "\n";
+	                money -= lostfunds;
+                    expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
 	            }
                 break;
@@ -4221,9 +4435,10 @@ public class TapiocaKing extends JApplet implements ActionListener
             case 9:
                 if (money >= 50)
                 {
-	                str = "An employee dropped some drinks! -$2\n";
-	                money -= 2;
-                    expenses[sindex] += 2;
+                	double lostfunds = money*.04;
+	                str = "An employee dropped some drinks! -$" + lostfunds + "\n";
+	                money -= lostfunds;
+                    expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
 	            }
                 break;
@@ -4234,15 +4449,15 @@ public class TapiocaKing extends JApplet implements ActionListener
                 moneyfield.setText(df.format(money));
                 break;
             case 11:
-                str = "Rent is lowered! +$100\n";
-                money += 100;
-                revenueE[sindex] += 100;
+                str = "Rent is lowered! +$75\n";
+                money += 75;
+                revenueE[sindex] += 75;
                 moneyfield.setText(df.format(money));
                 break;
             case 12:
-                str = "You catered the drinks for a company party! +$100\n";
-                money += 100;
-                revenueE[sindex] += 100;
+                str = "You catered the drinks for a company party! +$75\n";
+                money += 75;
+                revenueE[sindex] += 75;
                 moneyfield.setText(df.format(money));
                 break;
             case 13:
@@ -4276,9 +4491,9 @@ public class TapiocaKing extends JApplet implements ActionListener
                 diff_cus = max_cus - min_cus;
                 break;
             case 16:
-                str = "A baseball team just finished a game and came to your store to buy drinks! +$30\n";
-                money += 30;
-                revenueE[sindex] += 30;
+                str = "A baseball team just finished a game and came to your store to buy drinks! +$45\n";
+                money += 45;
+                revenueE[sindex] += 45;
                 moneyfield.setText(df.format(money));
                 break;
             case 17:
@@ -4355,7 +4570,57 @@ public class TapiocaKing extends JApplet implements ActionListener
   	
   	//Update the Ingredient supply cost in the Supplies tab.
   	private void updateIngSetCost() {
-         ingcalc = calculateIngSetCost() * (Double.parseDouble((String)ingcombo.getSelectedItem())/divisor);
+  		
+        ingcalc = calculateIngSetCost() * (Double.parseDouble((String)ingcombo.getSelectedItem())/divisor);
+        
+        //hide discount if not enough supply ordered
+		if (Integer.parseInt((String)ingcombo.getSelectedItem()) == 12)
+		{
+			discountLabel4.setVisible(false);
+		} 
+     	//if the selected amount of ingredients is 24, give a  2% discount
+		if (Integer.parseInt((String)ingcombo.getSelectedItem()) == 24)
+		{
+			discountLabel4.setText("2% OFF");
+			discountLabel4.setVisible(true);
+			ingcalc -= ingcalc * .02;
+			
+		}
+		//if the selected amount of ingredients is 48, give a  5% discount
+		else if (Integer.parseInt((String)ingcombo.getSelectedItem()) == 48)
+		{
+			discountLabel4.setText("5% OFF");
+			discountLabel4.setVisible(true);
+			ingcalc -= ingcalc * .05;
+		}
+		//if the selected amount of ingredients is 96, give a  10% discount
+		else if (Integer.parseInt((String)ingcombo.getSelectedItem()) == 96)
+		{
+			discountLabel4.setText("10% OFF");
+			ingcalc -= ingcalc * .10;
+		}
+		//if the selected amount of ingredients is 180, give a  15% discount
+		else if (Integer.parseInt((String)ingcombo.getSelectedItem()) == 180)
+		{
+			discountLabel4.setText("15% OFF");
+			discountLabel4.setVisible(true);
+			ingcalc -= ingcalc * .15;
+		}
+		//if the selected amount of ingredients is 300, give a  20% discount
+		else if (Integer.parseInt((String)ingcombo.getSelectedItem()) == 300)
+		{
+			discountLabel4.setText("20% OFF");
+			discountLabel4.setVisible(true);
+			ingcalc -= ingcalc * .20;
+		}
+		//if the selected amount of ingredients is 600, give a  30% discount
+		else if (Integer.parseInt((String)ingcombo.getSelectedItem()) == 600)
+		{
+			discountLabel4.setText("30% OFF");
+			discountLabel4.setVisible(true);
+			ingcalc -= ingcalc * .30;
+		}
+         
          costField4.setText(df.format(ingcalc));
   	}
   	
