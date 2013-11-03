@@ -124,10 +124,10 @@ public class TapiocaKing extends JApplet implements ActionListener
     int[] walks = new int[7];
     double[] revenue = new double[7];
     double[] revenueE = new double[7];
-    double[] expenses = new double[7];
+    static double[] expenses = new double[7];
     int[] dsold = new int[7];
     double[] tprofit = new double[7];
-   	int sindex = -1;
+   	static int sindex = -1;
    	
    	//for the supply text fields that calculates 
    	//how much each amount of supply will cost
@@ -1951,9 +1951,9 @@ public class TapiocaKing extends JApplet implements ActionListener
 					   	ingamt.setText(Integer.toString(ingsupply.getAmount()));
 					   	
                         //change the cost of supplies
-                        tmodel.setCupCost(.10);
+                        tmodel.setCupCost(.05);
                         tmodel.setStrawCost(.05);
-                        tmodel.setNapkinCost(.05);
+                        tmodel.setNapkinCost(.02);
                         
                         //cost of napkins
                         napcalc = tmodel.getInCost().get(Ingredients.Napkin)
@@ -1979,9 +1979,9 @@ public class TapiocaKing extends JApplet implements ActionListener
 						difString.setText("Business as Usual");
 						
 						//change the cost of supplies
-						tmodel.setCupCost(.12);
-						tmodel.setStrawCost(.07);
-						tmodel.setNapkinCost(.07);
+						tmodel.setCupCost(.07);
+						tmodel.setStrawCost(.05);
+						tmodel.setNapkinCost(.03);
 						
 						//cost of napkins
 						napcalc = tmodel.getInCost().get(Ingredients.Napkin)
@@ -2017,9 +2017,9 @@ public class TapiocaKing extends JApplet implements ActionListener
 				   	 	ingsupply = new Inventory(Ingredients.General, 20);
 						
 						//change the cost of supplies
-						tmodel.setCupCost(.15);
+						tmodel.setCupCost(.10);
 						tmodel.setStrawCost(.10);
-						tmodel.setNapkinCost(.10);
+						tmodel.setNapkinCost(.05);
 						
 						//cost of napkins
 						napcalc = tmodel.getInCost().get(Ingredients.Napkin)
@@ -4316,7 +4316,7 @@ public class TapiocaKing extends JApplet implements ActionListener
                 {
             		double lostfunds = money*.20;
 	                str = "The store's fridge " +
-	                "went down and needs maintenance! -$" + lostfunds + "\n";
+	                "went down and needs maintenance! -$" + df.format(lostfunds) + "\n";
 	                money -= lostfunds;
                     expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
@@ -4347,7 +4347,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             	if (money >= 100)
                 {
             		double lostfunds = money*.15;
-	                str = "The store's blenders broke! -$" + lostfunds + "\n";
+	                str = "The store's blenders broke! -$" + df.format(lostfunds) + "\n";
 	                money -= lostfunds;
                     expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
@@ -4368,7 +4368,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             	if (money >= 150)
                 {
             		double lostfunds = money*.2;
-	                str = "There was an earthquake! -$" + lostfunds + "\n";
+	                str = "There was an earthquake! -$" + df.format(lostfunds) + "\n";
 	                money -= lostfunds;
                     expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
@@ -4378,7 +4378,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             	if (money >= 150)
                 {
             		double stolenfunds = money*.15;
-	                str = "A burglar gave you the stickup and stole $" + stolenfunds + "\n";
+	                str = "A burglar gave you the stickup and stole $" + df.format(stolenfunds) + "\n";
 	                money -= stolenfunds;
                     expenses[sindex] += stolenfunds;
 	                moneyfield.setText(df.format(money));
@@ -4406,7 +4406,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             	if (money >= 100)
                 {
             		double lostfunds = money*.2;
-	                str = "Some punks vandalized the store! -$" + lostfunds + "\n";
+	                str = "Some punks vandalized the store! -$" + df.format(lostfunds) + "\n";
 	                money -= lostfunds;
                     expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
@@ -4436,7 +4436,7 @@ public class TapiocaKing extends JApplet implements ActionListener
                 if (money >= 50)
                 {
                 	double lostfunds = money*.04;
-	                str = "An employee dropped some drinks! -$" + lostfunds + "\n";
+	                str = "An employee dropped some drinks! -$" + df.format(lostfunds) + "\n";
 	                money -= lostfunds;
                     expenses[sindex] += lostfunds;
 	                moneyfield.setText(df.format(money));
@@ -4782,8 +4782,10 @@ public class TapiocaKing extends JApplet implements ActionListener
             inter_design2.setIcon(createImageIcon("modern_ex.jpg"));
     }
     
+    /* private function that sets the images for the interior of the store */
     private void compareInterior()
     {
+    	/*classic interior, no customer bonus*/
         if (interInd == 0)
         {
             store_ceiling.setIcon(createImageIcon("store_classic_ceiling.jpg"));
@@ -4797,6 +4799,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             store_money.setIcon(createImageIcon("store_money_classic.jpg"));
             store_rack.setIcon(createImageIcon("store_rack_classic.jpg"));
         }
+        /*modern interior, no customer bonus*/
         else if (interInd == 1)
         {
             store_ceiling.setIcon(createImageIcon("store_modern_ceiling.jpg"));
@@ -4811,6 +4814,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             store_rack.setIcon(createImageIcon("store_rack_modern.jpg"));
 
         }
+        /*space interior, +5 to min and max # of customers*/
         else if (interInd == 2)
         {
         	if (spaceflag == false)
@@ -4831,6 +4835,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             store_money.setIcon(createImageIcon("store_money_space.jpg"));
             store_rack.setIcon(createImageIcon("store_rack_space.jpg"));
         }
+        /*hollywood interior, +7 to min and max # of customers*/
         else if (interInd == 3)
         {
             if (hollyflag == false)
@@ -4851,6 +4856,7 @@ public class TapiocaKing extends JApplet implements ActionListener
             store_money.setIcon(createImageIcon("store_money_hollywood.jpg"));
             store_rack.setIcon(createImageIcon("store_rack_hollywood.jpg"));
         }
+        /*jungle interior, +10 to min and max # of customers*/
         else if (interInd == 4)
         {
         	if (jungleflag == false)
@@ -4881,7 +4887,6 @@ public class TapiocaKing extends JApplet implements ActionListener
      */
     private class Summary extends JDialog
     {
-    
         /**
 		 * 
 		 */
@@ -5243,6 +5248,8 @@ public class TapiocaKing extends JApplet implements ActionListener
 	    {
 	    	boolean flag = true;
     		int decision = 0;
+    		//use this to show which drink they bought
+    		String ordername = "";
     		if (table.getRowCount() > 0)
     		{
     		    // Generate the number of drinks a transaction contains
@@ -5255,6 +5262,9 @@ public class TapiocaKing extends JApplet implements ActionListener
                     
                     int o = temp_order-1;
                     Products order = tmodel.getDrinks().get(o);
+                    //set the order name to what they bought
+                    ordername = order.getName();
+                    
                     Ingredients[] order_ings = order.getIngredients();
                     
                     if (order_ings[0] != Ingredients.Water &&
@@ -5482,10 +5492,10 @@ public class TapiocaKing extends JApplet implements ActionListener
         		    String boughtStr = "";
                     custom[sindex] += 1;
 		      	    if (temp_num <= 1)
-		      	    	boughtStr = "A customer bought a drink!\n";
+		      	    	boughtStr = "A customer bought " + ordername + "!\n";
 		      	    else
 		      	    {
-		      	    	boughtStr = "A customer bought " + temp_num + " drinks!\n";
+		      	    	boughtStr = "A customer bought " + temp_num + " " + ordername + "s!\n";
 		      	    }
 		      	    
 		      	    try
